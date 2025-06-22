@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Autores Mexicanos Reconocidos</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background-color: #00796b;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    nav {
+      background-color: #e0f2f1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    nav button {
+      background: none;
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      color: #00796b;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    nav button:hover {
+      transform: scale(1.1);
+      background-color: #b2dfdb;
+      border-radius: 8px;
+    }
+    .autor {
+      background-color: white;
+      margin: 30px auto;
+      padding: 25px;
+      max-width: 900px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: none;
+      cursor: pointer;
+    }
+    .autor.active {
+      display: block;
+    }
+    .autor .biografia-extra {
+      display: none;
+      margin-top: 15px;
+      color: #555;
+    }
+    .autor.mostrar-extra .biografia-extra {
+      display: block;
+    }
+    .intro {
+      background-color: white;
+      margin: 30px auto;
+      padding: 25px;
+      max-width: 900px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: justify;
+    }
+    h2 {
+      color: #00796b;
+    }
+    ul {
+      margin-top: 0;
+      padding-left: 20px;
+    }
+    img.autor-img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+    footer {
+      background-color: #004d40;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 50px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #b2dfdb;
+    }
+
+    main {
+      margin-top: 100px; /* espacio para el header fijo */
+      padding: 20px;
+    }
+      #mode-selection,
+  #game,
+  #ahorcado-container {
+    display: none;
+  }
+
+  .active {
+    display: block !important;
+  }
+
+  .menu {
+    display: block;
+    margin-bottom: 20px;
+  }
+#mode-selection,
+#game,
+#ahorcado-container {
+  transition: all 0.4s ease;
+}
+#juegos,
+#menu,
+#mode-selection,
+#game,
+#ahorcado-container {
+  display: none;
+}
+
+#juegos, #menu, #mode-selection, #game, #ahorcado-container {
+  display: none;
+}
+
+#juegos.active, #menu.active, #mode-selection.active, #game.active, #ahorcado-container.active {
+  display: block;
+}
+
+
+#juegos.active,
+#menu.active,
+#mode-selection.active,
+#game.active,
+#ahorcado-container.active {
+  display: block;
+}
+.boton-regresar {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .boton-regresar:hover {
+    background-color: #45a049;
+  }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Autores Mexicanos Reconocidos</h1>
+    <p>Conoce las biografías, obras y premios de los escritores más influyentes de México</p>
+  </header>
+  <nav>
+    <button onclick="reiniciar()">Inicio</button>
+    <button onclick="mostrarAutor('paz')">Octavio Paz</button>
+    <button onclick="mostrarAutor('rulfo')">Juan Rulfo</button>
+    <button onclick="mostrarAutor('poniatowska')">Elena Poniatowska</button>
+    <button onclick="mostrarAutor('fuentes')">Carlos Fuentes</button>
+    <button onclick="mostrarAutor('castellanos')">Rosario Castellanos</button>
+    <a href="juegos.html">
+      <button>Ir a Juegos</button>
+    </a>
+  </nav>
+  <div class="intro" id="intro">
+    <h2>Nuestra Mision es:</h2>
+    <p>Esta página fue creada como parte de un proyecto educativo con el propósito de reconocer y difundir el legado de algunos de los escritores mexicanos más importantes. Aquí podrás conocer sus biografías, descubrir sus obras más destacadas y los premios que han recibido a lo largo de su carrera.</p>
+    <p>Más que una recopilación de información,  la mision de esta página es despertar el interés por la literatura mexicana y resaltar la huella que estos autores han dejado en nuestra cultura. Es un espacio para valorar sus ideas, entender su visión del mundo y sentirnos orgullosos de quienes han hecho de las palabras una forma de identidad.</p>
+  </div>
+  <div class="autor" id="paz" onclick="toggleExtra(this)">
+    <img src="https://www.mexicodesconocido.com.mx/wp-content/uploads/2020/03/paz01.jpg" alt="Octavio Paz" class="autor-img">
+    <h2>Octavio Paz</h2>
+    <p><strong>Biografía:</strong> Octavio Paz (1914–1998) fue un poeta, ensayista y diplomático mexicano...</p>
+    <p><strong>Obras destacadas:</strong></p>
+    <ul>
+      <li>El laberinto de la soledad</li>
+      <li>Piedra de sol</li>
+      <li>El arco y la lira</li>
+    </ul>
+    <p><strong>Premios:</strong></p>
+    <ul>
+      <li>Premio Nobel de Literatura (1990)</li>
+      <li>Premio Cervantes (1981)</li>
+    </ul>
+    <div class="biografia-extra">
+      fue uno de los escritores mexicanos más influyentes del siglo XX. Nació en Ciudad de México y desde joven mostró gran interés por la literatura y la filosofía. Su obra combina elementos del surrealismo, el modernismo y la tradición cultural mexicana, creando un estilo único que explora la identidad, el tiempo, el amor y la existencia.
+Paz tuvo una carrera diplomática que lo llevó a vivir en diferentes países, entre ellos Francia, Estados Unidos e India, donde profundizó en filosofías orientales que enriquecieron su pensamiento. Fue editor de revistas culturales y un activo promotor de la literatura y las artes en México.
+Entre sus obras más famosas destacan El laberinto de la soledad, un ensayo profundo sobre la identidad mexicana; Piedra de sol, un extenso poema que refleja el paso del tiempo y el amor; y El arco y la lira, un ensayo sobre la poesía.
+En 1990, Octavio Paz recibió el Premio Nobel de Literatura, reconocimiento que consolidó su legado como uno de los grandes pensadores y poetas de la literatura hispanoamericana. Su obra sigue siendo estudiada y admirada por su profundidad filosófica y su compromiso con la cultura mexicana.
+    </div>
+  </div>
+  <div class="autor" id="rulfo" onclick="toggleExtra(this)">
+    <img src="https://www.eluniversal.com.mx/resizer/v2/JLAEYC4F5ZBYHHKUWTMY33CQ5Q.jpg?auth=054c8ac85b67a0512a425a14819301fbe208d096b91eb6112ebd1ffbaac8d23e&smart=true&width=1100&height=666" alt="Juan Rulfo" class="autor-img">
+    <h2>Juan Rulfo</h2>
+    <p><strong>Biografía:</strong> Juan Rulfo (1917–1986) fue un escritor, guionista y fotógrafo mexicano...</p>
+    <p><strong>Obras destacadas:</strong></p>
+    <ul>
+      <li>Pedro Páramo</li>
+      <li>El llano en llamas</li>
+    </ul>
+    <p><strong>Premios:</strong></p>
+    <ul>
+      <li>Premio Xavier Villaurrutia (1956)</li>
+      <li>Premio Nacional de Letras (1970)</li>
+    </ul>
+    <div class="biografia-extra">
+       fue un escritor considerado uno de los grandes maestros de la literatura latinoamericana del siglo XX. Nació en Apulco, Jalisco, y su obra, aunque breve en cantidad, tiene un impacto profundo y duradero en la narrativa contemporánea.
+Su narrativa está marcada por un estilo sobrio y poético, que retrata con profundidad el mundo rural mexicano, las dificultades de la vida campesina, la pobreza, la violencia y la soledad. Es conocido por su habilidad para capturar la esencia y el espíritu de los pueblos mexicanos, especialmente en el contexto posterior a la Revolución Mexicana.
+Sus dos principales obras son Pedro Páramo, una novela que mezcla el realismo mágico con elementos fantasmagóricos y el abandono, y El llano en llamas, una colección de cuentos que exploran la vida y las tradiciones del campo mexicano.
+Juan Rulfo influyó en numerosos escritores latinoamericanos y es considerado precursor del realismo mágico, estilo que se popularizó con autores como Gabriel García Márquez. Además de su labor literaria, trabajó como guionista para el cine mexicano y desarrolló una reconocida carrera como fotógrafo.
+Su legado sigue siendo fundamental para entender la literatura mexicana y latinoamericana, destacándose por su sensibilidad y profundidad narrativa.
+    </div>
+  </div>
+  <div class="autor" id="poniatowska" onclick="toggleExtra(this)">
+    <img src="https://i0.wp.com/raicesalaire.com/wp-content/uploads/2022/05/ElenaPoniatowska-Web.jpg?fit=1200%2C627&ssl=1" alt="Elena Poniatowska" class="autor-img">
+    <h2>Elena Poniatowska</h2>
+    <p><strong>Biografía:</strong> Elena Poniatowska (n. 1932) es una escritora, periodista y activista naturalizada mexicana...</p>
+    <p><strong>Obras destacadas:</strong></p>
+    <ul>
+      <li>La noche de Tlatelolco</li>
+      <li>Tinísima</li>
+      <li>Leonora</li>
+    </ul>
+    <p><strong>Premios:</strong></p>
+    <ul>
+      <li>Premio Cervantes (2013)</li>
+      <li>Premio Nacional de Periodismo (1978)</li>
+    </ul>
+    <div class="biografia-extra">
+    Elena Poniatowska (nacida en 1932 en Francia, nacionalizada mexicana) es una destacada escritora, periodista y activista social reconocida por su compromiso con las causas sociales en México. Hija de una familia aristocrática europea, llegó a México en su infancia, donde desarrolló una profunda conexión con la realidad política y social del país.
+Su obra se caracteriza por combinar la crónica periodística con la narrativa literaria, dando voz a sectores marginados como mujeres, obreros, campesinos y víctimas de la violencia. Uno de sus trabajos más reconocidos es La noche de Tlatelolco, que documenta y denuncia la matanza de estudiantes ocurrida en 1968 en la Plaza de las Tres Culturas en la Ciudad de México.
+Además de su labor literaria, Poniatowska ha sido una figura clave en el periodismo crítico y el activismo, defendiendo los derechos humanos y la justicia social. Su estilo accesible, empático y comprometido la ha convertido en una de las voces más importantes del pensamiento contemporáneo mexicano.
+Ha recibido numerosos premios, entre ellos el Premio Cervantes en 2013, uno de los reconocimientos literarios más prestigiosos en el mundo de habla hispana.
+    </div>
+  </div>
+  <div class="autor" id="fuentes" onclick="toggleExtra(this)">
+    <img src="https://thebookoflifemagazine.com/wp-content/uploads/2024/04/carlos-fuentes-detalles-1683912310404.jpeg" alt="Carlos Fuentes" class="autor-img">
+    <h2>Carlos Fuentes</h2>
+    <p><strong>Biografía:</strong> Carlos Fuentes (1928–2012) fue un novelista, ensayista y diplomático mexicano...</p>
+    <p><strong>Obras destacadas:</strong></p>
+    <ul>
+      <li>La región más transparente</li>
+      <li>Terra Nostra</li>
+      <li>La muerte de Artemio Cruz</li>
+    </ul>
+    <p><strong>Premios:</strong></p>
+    <ul>
+      <li>Premio Cervantes (1987)</li>
+      <li>Premio Rómulo Gallegos (1977)</li>
+    </ul>
+    <div class="biografia-extra">
+        fue uno de los escritores y ensayistas más importantes de México y una figura central del llamado "Boom latinoamericano". Nació en Ciudad de Panamá, pero fue criado en México y tuvo una amplia experiencia internacional debido al trabajo diplomático de su familia.
+Su obra literaria explora la historia, la identidad y las contradicciones de México, combinando elementos políticos, filosóficos y sociales. Sus novelas destacan por su complejidad narrativa y por el uso de simbolismos y técnicas innovadoras. Entre sus obras más destacadas se encuentran La región más transparente, La muerte de Artemio Cruz y Terra Nostra.
+Fuentes también fue un intelectual comprometido con los problemas sociales y políticos de México y Latinoamérica, y su trabajo tuvo un gran impacto en la literatura universal. Recibió premios como el Premio Cervantes en 1987 y el Premio Rómulo Gallegos en 1977.
+    </div>
+  </div>
+  <div class="autor" id="castellanos" onclick="toggleExtra(this)">
+    <img src="https://www.paginazero.com.mx/sites/default/files/styles/large/public/2024-06/rosario%20castellanos.jpg?itok=EsVzTRNK" alt="Rosario Castellanos" class="autor-img">
+    <h2>Rosario Castellanos</h2>
+    <p><strong>Biografía:</strong> Rosario Castellanos (1925–1974) fue una escritora, diplomática y poeta chiapaneca...</p>
+    <p><strong>Obras destacadas:</strong></p>
+    <ul>
+      <li>Balún Canán</li>
+      <li>Oficio de tinieblas</li>
+      <li>Poesía no eres tú</li>
+    </ul>
+    <p><strong>Premios:</strong></p>
+    <ul>
+      <li>Premio Xavier Villaurrutia (1960)</li>
+      <li>Reconocida póstumamente como pionera del feminismo literario</li>
+    </ul>
+    <div class="biografia-extra">
+         fue una poeta, novelista y diplomática mexicana originaria de Chiapas, reconocida como una de las voces femeninas más importantes en la literatura mexicana del siglo XX. Su obra está marcada por una profunda sensibilidad hacia la situación de los pueblos indígenas, la condición de la mujer y la lucha por la igualdad social.
+Castellanos abordó temas como la opresión, el racismo y la desigualdad de género, convirtiéndose en una pionera del feminismo literario en México. Entre sus obras más relevantes se encuentran Balún Canán, Oficio de tinieblas y Poesía no eres tú.
+Además de su trabajo literario, fue embajadora de México en Israel y una defensora constante de los derechos humanos. Su legado ha inspirado a generaciones de escritores y activistas, y es considerada una figura clave en la lucha por la justicia social y cultural en México.
+    </div>
+  </div>
+  <footer>
+    <p>&copy; 2025 Autores Mexicanos | Desarrollado con fines educativos</p>
+  </footer>
+  <script>
+    function mostrarAutor(id) {
+      document.getElementById("intro").style.display = "none";
+      const autores = document.querySelectorAll('.autor');
+      autores.forEach(div => {
+        div.classList.remove('active');
+        div.classList.remove('mostrar-extra');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+    function reiniciar() {
+      document.getElementById("intro").style.display = "block";
+      const autores = document.querySelectorAll('.autor');
+      autores.forEach(div => {
+        div.classList.remove('active');
+        div.classList.remove('mostrar-extra');
+      });
+    }
+    function toggleExtra(element) {
+      element.classList.toggle('mostrar-extra');
+    }
+  </script>
+</body>
+</html>
